@@ -43,7 +43,7 @@ const processGenres = async (genresMovie, dbMovieId, connection) => {
   }
 };
 
-const getNext20Movies = async (startMovieId) => {
+const getNextMoreMovies = async (startMovieId, size) => {
   const connection = await pool.getConnection();
   let currentMovieId = startMovieId;
   let fetchedCount = 0;
@@ -51,7 +51,7 @@ const getNext20Movies = async (startMovieId) => {
   try {
     await connection.beginTransaction();
 
-    while (fetchedCount < 20) {
+    while (fetchedCount < size) {
       console.log("fetchedCount:", fetchedCount);
 
       try {
@@ -118,7 +118,7 @@ router.post('/getM', async (req, res) => {
     console.log(`Processing movie IDs: ${movieIds}`);
 
     for (const startMovieId of movieIds) {
-      await getNext20Movies(startMovieId);
+      await getNextMoreMovies(startMovieId, 5);
 
       console.log(`Waiting ${delayBetweenBatches / 1000} seconds before processing the next batch.`);
       await new Promise((resolve) => setTimeout(resolve, delayBetweenBatches));
