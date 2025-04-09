@@ -94,7 +94,7 @@ const getNextMoreMovies = async (startMovieId, size) => {
     }
 
     await connection.commit();
-    console.log('Completed transaction for 20 movies.');
+    console.log(`Completed transaction for ${size} movies.`);
 
   } catch (error) {
     await connection.rollback();
