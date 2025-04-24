@@ -118,7 +118,7 @@ router.post('/getM', async (req, res) => {
     console.log(`Processing movie IDs: ${movieIds}`);
 
     for (const startMovieId of movieIds) {
-      await getNextMoreMovies(startMovieId, 5);
+      await getNextMoreMovies(startMovieId, 2);
 
       console.log(`Waiting ${delayBetweenBatches / 1000} seconds before processing the next batch.`);
       await new Promise((resolve) => setTimeout(resolve, delayBetweenBatches));

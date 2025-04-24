@@ -99,8 +99,8 @@ export const saveMovieToDatabase = async (movie, connection) => {
     console.log("movie start save data");
 
     const [result] = await connection.execute(
-      'INSERT INTO movies (id, title, original_title, overview, original_language, score, release_date, budget, revenue, runtime, status, tagline, poster_id, backdrop_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
-      [movieId, movie.title, movie.original_title, movie.overview, movie.original_language, movie.vote_average, movie.release_date || null, movie.budget, movie.revenue, movie.runtime, 'enabled', movie.tagline, posterId, backdropId]
+      'INSERT INTO movies (id, title, original_title, overview, original_language, score, release_date, budget, revenue, runtime, status, poster_id, backdrop_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())',
+      [movieId, movie.title, movie.original_title, movie.overview, movie.original_language, movie.vote_average, movie.release_date || null, movie.budget, movie.revenue, movie.runtime, 'enabled', posterId, backdropId]
     );
   
     console.log('Resultado de la inserción:', result);
